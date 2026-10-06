@@ -1,0 +1,12 @@
+db1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+web1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+db1 | CHANGED | rc=0 >>
+ 10:52:02 up  1:19,  2 users,  load average: 0.10, 0.03, 0.01
+web1 | CHANGED | rc=0 >>
+ 10:52:02 up  1:19,  2 users,  load average: 0.10, 0.03, 0.01
