@@ -1,0 +1,22 @@
+- name: Setup and configure Nginx web server
+  hosts: webservers
+  become: true
+
+  tasks:
+     - name: Ensure Nginx package is installed
+       ansible.builtin.apt:
+         name: nginx
+         state: present
+     
+     - name: Deploy custom index page
+       ansible.builtin.copy:
+         content: "<h1> Production Web Tier: Depoy via Ansible Playbook</h1>\n"
+         dest: /var/www/html/index.html
+         owner: www-data
+         group: www-data
+         mode: '0644'
+
+     - name: Ensure Nginx service is running
+       ansible.builtin.service:
+         name: nginx
+         state: started
