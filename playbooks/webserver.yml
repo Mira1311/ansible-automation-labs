@@ -2,6 +2,11 @@
   hosts: webservers
   become: true
 
+  vars:
+     web_package: nginx
+     web_doc_root: /var/www/html
+     web_user: www-data
+
   tasks:
      - name: Ensure Nginx package is installed
        ansible.builtin.apt:
@@ -10,13 +15,20 @@
      
      - name: Deploy custom index page
        ansible.builtin.copy:
-         content: "<h1> Production Web Tier: Depoy via Ansible Playbook</h1>\n"
-         dest: /var/www/html/index.html
-         owner: www-data
-         group: www-data
+         content: "<h1> Production Web Tier: Managed via Variables & Handlers Playbook v2</h1>\n"
+         dest: "{{ web_doc_root }}/index.html"
+         owner: "{{ web_user }}"
+         group: "{{ web_user }}"
          mode: '0644'
+       notify: Restart Nginx
 
      - name: Ensure Nginx service is running
        ansible.builtin.service:
          name: nginx
          state: started
+  handlers:
+     - name: Restart Nginx
+       ansible.builtin.service:
+         name: "{{ web_package }}"
+         state: restarted
+
