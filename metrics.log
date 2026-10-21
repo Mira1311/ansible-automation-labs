@@ -1,0 +1,11 @@
+--- System Metrics Report ---
+Wed Oct 21 21:43:28 +07 2026
+
+[Memory Usage]
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       898Mi        14Gi        49Mi       545Mi        14Gi
+Swap:          4.0Gi          0B       4.0Gi
+
+[Root Disk Usage]
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  3.3G  953G   1% /

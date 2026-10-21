@@ -6,6 +6,8 @@
      web_package: nginx
      web_doc_root: /var/www/html
      web_user: www-data
+     server_env: "Staging"
+     app_port: 80
 
   tasks:
      - name: Ensure Nginx package is installed
@@ -15,7 +17,9 @@
      
      - name: Deploy custom index page
        ansible.builtin.copy:
-         content: "<h1> Production Web Tier: Managed via Variables & Handlers Playbook v2</h1>\n"
+         content: |
+           "<h1> Production Web Tier: Managed via Variables & Handlers Playbook v2</h1>\n"
+           "<h3> Server is running with {{ server_env }} running on port {{ app_port }}</h3>"
          dest: "{{ web_doc_root }}/index.html"
          owner: "{{ web_user }}"
          group: "{{ web_user }}"
